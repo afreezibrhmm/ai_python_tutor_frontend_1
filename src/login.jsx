@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +12,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
-      const res = await axios.post(`${API_BASE_URL}/api/login`, { username, password });
+const res = await axios.post(`${API_BASE_URL}/api/login`, { username, password });
       localStorage.setItem('token', res.data.access_token);
       localStorage.setItem('role', res.data.role);
       

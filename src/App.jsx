@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Login from "./login.jsx";
-import Tutor from "./tutor.jsx";
-import Admin from "./admin.jsx";
+import Login from './components/Login';
+import Tutor from './components/Tutor';
+import Admin from './components/Admin';
 
 export default function App() {
   return (

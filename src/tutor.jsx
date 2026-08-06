@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 export default function Tutor() {
   const navigate = useNavigate();
   
@@ -31,7 +31,7 @@ export default function Tutor() {
       const token = localStorage.getItem('token'); 
       
       // 👇 Hardcoded perfectly for your local laptop test
-      const response = await axios.post('http://127.0.0.1:8000/api/evaluate', {
+      const response = await axios.post(`${API_BASE_URL}/api/evaluate`, {
         current_topic: topic,
         student_code: code
       }, {

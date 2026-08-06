@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
 export default function Admin() {
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
@@ -22,7 +22,7 @@ export default function Admin() {
 
     const fetchStudents = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/admin/students', {
+        const response = await axios.get('${API_BASE_URL}/api/admin/students', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setStudents(response.data);
@@ -39,7 +39,7 @@ export default function Admin() {
   const handleViewProfile = async (studentId) => {
     setProfileLoading(true);
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/admin/students/${studentId}/history`, {
+      const response = await axios.get(`${API_BASE_URL}/api/admin/students/${studentId}/history`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSelectedStudent(response.data);
