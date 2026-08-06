@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+
 export default function Admin() {
   const navigate = useNavigate();
   const [students, setStudents] = useState([]);
@@ -22,10 +24,17 @@ export default function Admin() {
 
     const fetchStudents = async () => {
       try {
-        const response = await axios.get('${API_BASE_URL}/api/admin/students', {
+        // ✅ FIXED: Using backticks (`) instead of single quotes (')
+        const response = await axios.get(`${API_BASE_URL}/api/admin/students`, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        setStudents(response.data);
+        
+        // ✅ FIXED: Safely extracts the array even if wrapped in an object like { students: [...] }
+        const studentsArray = Array.isArray(response.data)
+          ? response.data
+          : response.data.students || response.data.users || response.data.data || [];
+          
+        setStudents(studentsArray);
       } catch (err) {
         if (err.response?.status === 401) navigate('/login');
       }
@@ -82,12 +91,12 @@ export default function Admin() {
           {/* Profile Card */}
           <div style={{ backgroundColor: 'white', padding: '30px', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', marginBottom: '30px' }}>
             <h2 style={{ margin: '0 0 4px 0', color: '#111827' }}>Student Profile: {selectedStudent.username}</h2>
-            <p style={{ margin: 0, color: '#6b7280' }}>Total Submissions Analyzed: {selectedStudent.submissions.length}</p>
+            <p style={{ margin: 0, color: '#6b7280' }}>Total Submissions Analyzed: {selectedStudent?.submissions?.length || 0}</p>
           </div>
 
           {/* Submissions Timeline */}
           <h3 style={{ color: '#374151', marginBottom: '15px' }}>Submission History</h3>
-          {selectedStudent.submissions.length === 0 ? (
+          {!selectedStudent?.submissions || selectedStudent.submissions.length === 0 ? (
             <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '12px', textAlign: 'center', color: '#9ca3af' }}>
               This student hasn't submitted any code to the AI Tutor yet.
             </div>
@@ -131,7 +140,8 @@ export default function Admin() {
                 </tr>
               </thead>
               <tbody>
-                {students.map((student) => (
+                {/* ✅ FIXED: Safeguarded with Array.isArray(students) so map() can never crash */}
+                {Array.isArray(students) && students.map((student) => (
                   <tr key={student.id} style={{ borderBottom: '1px solid #e5e7eb' }}>
                     <td style={{ padding: '16px 20px', color: '#111827', fontWeight: '500' }}>#{student.id}</td>
                     <td style={{ padding: '16px 20px', color: '#374151' }}>{student.username}</td>
