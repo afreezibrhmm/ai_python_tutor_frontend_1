@@ -1,16 +1,10 @@
-# React + Vite
+AI Python Tutor is an interactive educational platform designed to help students master Python through real-time code evaluation and AI-generated feedback. Featuring role-based authentication, students can practice coding and track their submission history, while instructors use the Admin Dashboard to inspect student performance and code reviews.
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+🚀 Key Features:
+Interactive Code Workspace: Students can write, run, and submit Python code directly from their browser.
+Real-Time AI Feedback: Evaluates student submissions instantly, providing actionable debugging advice and feedback.
+Role-Based Access Control (RBAC): Secure JWT-based authentication distinguishing between student and admin accounts.
+Student Progress Tracking: Maintains a persistent submission history with timestamps, topics, submitted code, and AI responses.
+Admin Mission Control: Dedicated instructor dashboard to view class rosters, monitor submission counts, and drill down into individual student profiles and feedback logs.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Can access through: https://ai-python-tutor-frontend-1-git-main-afreezibrhmms-projects.vercel.app/
