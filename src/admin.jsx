@@ -16,6 +16,19 @@ export default function Admin() {
   const token = localStorage.getItem('token');
   const role = localStorage.getItem('role');
 
+const handlePasswordChangeSubmit = async (usernameToUpdate) => {
+  try {
+    const res = await axios.put(`${API_BASE_URL}/api/update-password`, {
+      username: usernameToUpdate,
+      new_password: newPassword
+    });
+
+    alert("Success: " + res.data.message);
+    } catch (err) {
+    alert("Failed to update: " + (err.response?.data?.detail || "Unknown error"));
+  }
+};
+  
   useEffect(() => {
     if (role !== 'admin' || !token) {
       navigate('/login');
